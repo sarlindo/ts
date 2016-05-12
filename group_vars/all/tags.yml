@@ -1,4 +1,4 @@
 ---
- ENV: testing
- application: wordpress
- server_role: webserver
+ ENV: prd
+ application: ticksmith
+ server_role: bigdataserver
