@@ -1,0 +1,10 @@
+---
+ - include: playbooks/provisionaws.yml
+
+# - hosts: webserver
+#   sudo: True 
+#   remote_user: root
+#   gather_facts: True
+#   pre_tasks:
+#     - include_vars: rds_info.yml
+#   roles:
