@@ -30,10 +30,10 @@
      public_subnet_2: "{{ lookup('file', 'aws/vars/' + vpc_name + '-' + public_az_2 + '-public-subnet.yml') }}"
      private_subnet_1: "{{ lookup('file', 'aws/vars/' + vpc_name + '-' + private_az_1 + '-private-subnet.yml') }}"
 
- - name: Copy the NAT gateway script to /aws/vars
+ - name: Copy the NAT gateway awscli script to /aws/vars
    template: src=/home/arlindo/projects/ts/playbooks/aws/templates/create-nat-gw.sh dest=/home/arlindo/projects/ts/playbooks/aws/vars/create-nat-gw.sh mode=0755
 
- - name: Create NAT gateway by executing the script
+ - name: Create NAT gateway by executing the awscli script
    shell: sh /home/arlindo/projects/ts/playbooks/aws/vars/create-nat-gw.sh
 
  - name: Modify private subnet route table
