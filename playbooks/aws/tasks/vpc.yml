@@ -15,12 +15,12 @@
  - name: VPC | Write vpc id to file inside the vars directory
    shell: echo "{{ vpc.vpc_id }}" > "{{ vpc_name }}-vpc-info.yml"
    args:
-     chdir: /home/arlindo/projects/ts/playbooks/aws/vars/
+     chdir: playbooks/aws/vars/
 
  - name: VPC | Write public and private subnets id to files inside the vars directory  
    shell: echo "{{ item.id }}" > "{{ item.resource_tags.Name }}.yml"
    args:
-     chdir: /home/arlindo/projects/ts/playbooks/aws/vars/
+     chdir: playbooks/aws/vars/
    with_items: "{{ vpc.subnets }}"
 
  - name: VPC | Set the public and private subnet id as facts
@@ -31,10 +31,10 @@
      private_subnet_1: "{{ lookup('file', 'aws/vars/' + vpc_name + '-' + private_az_1 + '-private-subnet.yml') }}"
 
  - name: Copy the NAT gateway awscli script to /aws/vars
-   template: src=/home/arlindo/projects/ts/playbooks/aws/templates/create-nat-gw.sh dest=/home/arlindo/projects/ts/playbooks/aws/vars/create-nat-gw.sh mode=0755
+   template: src=aws/templates/create-nat-gw.sh dest=./playbooks/aws/vars/create-nat-gw.sh mode=0755
 
  - name: Create NAT gateway by executing the awscli script
-   shell: sh /home/arlindo/projects/ts/playbooks/aws/vars/create-nat-gw.sh
+   shell: sh playbooks/aws/vars/create-nat-gw.sh
 
  - name: Modify private subnet route table
    ec2_vpc_route_table:
